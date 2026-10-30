@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { base } from '../data/nav';
+---
+<Layout title="Accueil">
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow">Lectures en néonatalogie</p>
+        <h1>Une histoire, <span>une voix,</span> un lien.</h1>
+        <p class="lead">« Je lis pour toi » propose des temps de lecture auprès des bébés hospitalisés, en présence de leurs parents. Un moment de douceur pour se rencontrer, se rapprocher et partager.</p>
+        <a class="btn" href={`${base}/a-propos`}>Découvrir le projet <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="hero__image"><img src={`${base}/images/je-lis-pour-toi.JPG`} alt="Illustration du projet Je lis pour toi – Lectures en néonatalogie" fetchpriority="high" /></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__heading"><p class="eyebrow">Pourquoi lire aux tout-petits ?</p><h2>La lecture, même au tout début de la vie, a toute sa place.</h2><p>L’hospitalisation d’un nouveau-né, notamment en néonatalogie, peut bouleverser les premiers liens entre le bébé et ses parents. La séparation, la distance et les contraintes des soins peuvent rendre les échanges plus difficiles.</p></div>
+      <div class="cards">
+        <article class="info-card"><div class="info-card__number">01</div><h3>Créer du lien</h3><p>La voix du parent, les mots et la proximité autour d’un livre offrent un moment privilégié à partager avec son bébé.</p></article>
+        <article class="info-card"><div class="info-card__number">02</div><h3>Éveiller le langage</h3><p>Les sons, les mots, les rimes et les intonations entendus dès les premiers jours nourrissent l’éveil au langage.</p></article>
+        <article class="info-card"><div class="info-card__number">03</div><h3>Ouvrir l’imaginaire</h3><p>Les histoires éveillent la curiosité et invitent peu à peu le bébé à associer les sons et les images.</p></article>
+        <article class="info-card"><div class="info-card__number">04</div><h3>Soutenir les parents</h3><p>Lire permet aux parents de retrouver une place active et de vivre un moment simple avec leur enfant.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container split">
+      <div><p class="eyebrow">Le projet</p><h2>Faire de l’hospitalisation un lieu de partage.</h2><p>Des bénévoles lecteurs formés se rendent dans les unités de néonatalogie avec une bibliothèque mobile. Chaque lecture est adaptée au bébé, à son rythme et à la présence de ses parents.</p><p>Au-delà de l’accès aux livres, le projet souhaite favoriser la rencontre, la proximité et les échanges entre le bébé et sa famille.</p><a class="btn btn--light" href={`${base}/a-propos`}>En savoir plus</a></div>
+      <div class="highlight"><span class="highlight__label">À retenir</span><h3>Les livres de la bibliothèque mobile sont utilisés par les bénévoles.</h3><p>Ils servent aux temps de lecture dans le service. En complément, un petit livre est remis à chaque famille lors de son arrivée, pour être lu avec le bébé, emporté à la maison ou conservé en souvenir.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__heading"><p class="eyebrow">Les rendez-vous lecture</p><h2>Des bénévoles présents au fil de la semaine.</h2><p>Les interventions s’organisent autour de trois rendez-vous identifiés dans le service.</p></div>
+      <div class="schedule">
+        <article class="schedule__item"><span class="schedule__day">Lundi</span><h3>Bibliothèque de Necker</h3><p>Prêt de livres aux parents et présentation d’un Kamishibaï par la bibliothécaire, auprès des parents et de leur bébé.</p></article>
+        <article class="schedule__item"><span class="schedule__day">Mercredi après-midi</span><h3>Lions Clubs</h3><p>Des bénévoles viennent proposer des temps de lecture aux bébés et à leurs parents.</p></article>
+        <article class="schedule__item"><span class="schedule__day">Samedi</span><h3>Main dans la Main</h3><p>Les bénévoles interviennent exclusivement dans le cadre du projet de lecture parent-enfant.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="container">
+      <div class="section__heading"><p class="eyebrow">La lecture en images</p><h2>Quelques instants autour des histoires.</h2><p>Découvrez les vidéos de présentation du projet et de son univers.</p></div>
+      <div class="video-grid">
+        <article class="video-card"><video controls preload="metadata" playsinline><source src={`${base}/videos/je-lis-pour-toi.mp4`} type="video/mp4" />Votre navigateur ne prend pas en charge la lecture vidéo.</video><h3>Je lis pour toi</h3><p>Présentation du projet de lecture en néonatalogie.</p></article>
+        <article class="video-card"><video controls preload="metadata" playsinline><source src={`${base}/videos/plume-et-lune.mp4`} type="video/mp4" />Votre navigateur ne prend pas en charge la lecture vidéo.</video><h3>Plume et Lune</h3><p>Une histoire à découvrir et à partager autour du livre.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container"><div class="cta-band"><div><p class="eyebrow" style="color:#c4dce5">Faire grandir le projet</p><h2>Un livre pour commencer une histoire ensemble.</h2><p>Le projet souhaite offrir un petit livre à chaque famille lors de son arrivée dans le service. Il recherche encore des financements pour faire vivre cette démarche. Les informations pour soutenir le projet seront ajoutées prochainement.</p></div><a class="btn" href={`${base}/a-propos`}>Comprendre cette démarche</a></div></div>
+  </section>
+</Layout>

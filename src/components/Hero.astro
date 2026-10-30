@@ -1,0 +1,78 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+
+const { title, subtitle, ctaLabel, ctaHref, secondaryLabel, secondaryHref } = Astro.props;
+---
+
+<section class="hero">
+  <div class="container hero__inner">
+    <h1>{title}</h1>
+    {subtitle && <p class="hero__subtitle">{subtitle}</p>}
+    {
+      (ctaLabel || secondaryLabel) && (
+        <div class="hero__actions">
+          {ctaLabel && ctaHref && <a class="btn" href={ctaHref}>{ctaLabel}</a>}
+          {secondaryLabel && secondaryHref && (
+            <a class="btn btn--ghost" href={secondaryHref}>{secondaryLabel}</a>
+          )}
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(4rem, 10vw, 7.5rem);
+    color: var(--cream);
+    background:
+      radial-gradient(circle at 88% 15%, color-mix(in srgb, var(--orange) 38%, transparent), transparent 42%),
+      radial-gradient(circle at 8% 100%, color-mix(in srgb, var(--green) 40%, transparent), transparent 45%),
+      var(--brown);
+  }
+
+  .hero__inner {
+    max-width: 760px;
+  }
+
+  .hero h1 {
+    color: var(--cream);
+  }
+
+  .hero__subtitle {
+    font-size: 1.25rem;
+    color: #eadfce;
+    max-width: 55ch;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+
+  .hero :global(.btn--ghost) {
+    border-color: var(--cream);
+    color: var(--cream);
+  }
+
+  .hero :global(.btn--ghost:hover) {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--ink);
+  }
+
+  .hero :global(.btn:not(.btn--ghost):hover) {
+    background: var(--cream);
+    border-color: var(--cream);
+    color: var(--brown);
+  }
+</style>
