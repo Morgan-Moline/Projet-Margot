@@ -70,8 +70,8 @@ const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
 
   <section class="section section--soft">
     <div class="container split">
-      <div><h2>Des livres pour deux façons de partager.</h2><p>La bibliothèque mobile accompagne les lectures réalisées par les bénévoles dans le service. En parallèle, un petit livre est remis à chaque famille à son arrivée afin qu’elle puisse le garder et poursuivre cette histoire à la maison.</p></div>
-      <div class="highlight"><span class="highlight__label">Le saviez-vous ?</span><h3>Le livre remis à la famille lui appartient.</h3><p>Il peut devenir un repère, un souvenir et le début d’un rituel de lecture partagé.</p></div>
+      <div><h2>Des livres pour deux façons de partager.</h2><p>La bibliothèque mobile permet aux bénévoles de faire découvrir différents albums aux familles lors des temps de lecture dans le service. À chaque entrée dans le service, un seul livre est offert à la famille : <strong>Pablo</strong>, de Rascal. Ce livre lui appartient et peut être emporté à la maison.</p></div>
+      <div class="highlight"><span class="highlight__label">Le saviez-vous ?</span><div class="highlight__book"><img src={imageBase + '614QnWcgY7L._SL1500_.jpg'} alt="Couverture du livre Pablo de Rascal" loading="lazy" /><div><h3>Un livre offert à chaque famille : Pablo, de Rascal.</h3><p>Ce livre est remis à chaque entrée dans le service. C’est le seul album offert ; les autres livres sont disponibles dans la bibliothèque mobile pour être lus sur place avec les bénévoles.</p></div></div></div>
     </div>
   </section>
 </Layout>
@@ -115,6 +115,7 @@ const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
 </script>
 
 <style>
+  .highlight__book{display:grid;grid-template-columns:minmax(90px,32%) minmax(0,1fr);gap:1rem;align-items:center;margin-top:.75rem}.highlight__book img{display:block;width:100%;max-height:190px;object-fit:contain;border-radius:.35rem}.highlight__book h3{margin:0 0 .5rem}.highlight__book p{margin:0}
   .books-section{padding-top:4rem}
   .books-intro{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:end;margin-bottom:2rem}
   .books-intro h2{margin-bottom:0}
