@@ -25,6 +25,7 @@ const books = [
   { title: 'Une poule sur un mur', author: 'Thierry Dedieu', illustrator: 'Thierry Dedieu', summary: 'La célèbre comptine « Une poule sur un mur » est mise en images avec humour et en noir et blanc. Un album grand format pensé pour les tout-petits.', theme: 'Comptines et premières découvertes', cover: imageBase + 'Une-poule-sur-un-mur.jpg', coverAlt: 'Couverture de Une poule sur un mur de Thierry Dedieu' },
   { title: 'Comme ça', author: 'Claire Lebourg', illustrator: 'Claire Lebourg', summary: 'Le jour de la naissance d’un enfant, une nouvelle vie commence. Avec tendresse, l’album raconte le quotidien d’une famille, ses joies, ses inquiétudes et ses retrouvailles.', theme: 'Comptines et premières découvertes', cover: imageBase + 'COMME_CA_DP150-1-75rhtia93yx0n4sk28260dvgs86b1gcace8iw1ujvxf.jpg', coverAlt: 'Couverture de Comme ça' },
   { title: 'Un amour profond', author: 'Stephen Hogtun', illustrator: 'Stephen Hogtun', translator: 'Lyse Leroy', summary: 'Une maman baleine met au monde son petit, le guide, le nourrit et lui apprend à vivre. Lorsqu’il devient grand, vient le moment de la séparation, mais le chant d’amour de sa mère continue de l’accompagner.', theme: 'Famille et tendresse', cover: imageBase + '8c24cafbe386061e575599456b67.png', coverAlt: 'Couverture de Un amour profond' },
+  { title: 'À toi qui es là', author: 'Albane Gellé et 20 autres poètes et poétesses', illustrator: 'Maya McCallum', summary: 'Un recueil de 30 poèmes inédits écrits pour les nouveau-nés et leurs parents. Ces textes poétiques évoquent la grossesse, la naissance et le monde qui s’ouvre au bébé, pour partager un moment de lecture et de douceur.', theme: 'Famille et tendresse', cover: imageBase + '614l9Rpqg3L._SL1500_.jpg', coverAlt: 'Couverture de À toi qui es là, poésie pour nouveau-né' },
 ];
 
 const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
@@ -42,7 +43,7 @@ const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
   <section class="section books-section">
     <div class="container">
       <div class="books-intro">
-        <div><p class="eyebrow">La bibliothèque du projet</p><h2>21 histoires à découvrir</h2></div>
+        <div><p class="eyebrow">La bibliothèque du projet</p><h2>22 histoires à découvrir</h2></div>
         <p>Chaque livre est présenté avec son auteur, son illustrateur lorsqu’il est identifié et un court résumé. Les références qui restent à confirmer sont signalées en toute transparence.</p>
       </div>
       <nav class="book-filters" aria-label="Filtrer les livres par thème">
