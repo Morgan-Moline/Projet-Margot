@@ -62,7 +62,7 @@ const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
           </article>
         ))}
       </div>
-      <p class="books-note">Certaines couvertures ne sont pas encore disponibles et certaines notices bibliographiques sont à confirmer à partir des exemplaires physiques. Les images affichées correspondent aux éditions retrouvées en ligne et peuvent différer de celles des livres possédés par le projet.</p>
+      <p class="books-note">Les couvertures affichées correspondent aux éditions retrouvées en ligne ; elles peuvent différer de celles des exemplaires possédés par le projet. Si une image distante devient indisponible, une couverture de remplacement reprenant le titre et l’auteur s’affiche automatiquement.</p>
     </div>
   </section>
 
@@ -87,6 +87,29 @@ const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
       });
     });
   });
+  // Une image distante peut disparaître : on affiche alors une couverture de secours
+  // construite avec le titre et l'auteur, plutôt qu'un emplacement vide.
+  document.querySelectorAll<HTMLImageElement>('.book-card__cover img').forEach((img) => {
+    const showFallback = () => {
+      const card = img.closest('.book-card');
+      const title = card?.querySelector('h3')?.textContent?.trim() || 'Livre';
+      const author = card?.querySelector('.book-card__author')?.textContent?.replace('Auteur :', '').trim() || 'Je lis pour toi';
+      const fallback = document.createElement('div');
+      fallback.className = 'book-cover-fallback';
+      fallback.setAttribute('role', 'img');
+      fallback.setAttribute('aria-label', `Couverture de remplacement : ${title}, ${author}`);
+      const label = document.createElement('span');
+      label.textContent = 'JE LIS POUR TOI';
+      const heading = document.createElement('strong');
+      heading.textContent = title;
+      const credit = document.createElement('small');
+      credit.textContent = author;
+      fallback.append(label, heading, credit);
+      img.replaceWith(fallback);
+    };
+    img.addEventListener('error', showFallback, { once: true });
+    if (img.complete && img.naturalWidth === 0) showFallback();
+  });
 </script>
 
 <style>
@@ -101,7 +124,7 @@ const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
   .book-card{overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);display:flex;flex-direction:column}
   .book-card[hidden]{display:none}
   .book-card__cover{height:280px;padding:1rem;background:linear-gradient(145deg,#e7eff0,#f7eee7);display:grid;place-items:center}
-  .book-card__cover img{height:100%;width:100%;object-fit:contain;filter:drop-shadow(0 8px 10px rgb(30 50 60 / 14%))}
+  .book-card__cover img{height:100%;width:100%;object-fit:contain;filter:drop-shadow(0 8px 10px rgb(30 50 60 / 14%))}\n  .book-cover-fallback{height:100%;width:min(100%,210px);aspect-ratio:3/4;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding:1.4rem 1rem;background:linear-gradient(145deg,#dceaf3,#f8f6f1 58%,#f3e9ce);border:8px solid #fffefa;outline:1px solid #d8d3c8;box-shadow:0 8px 18px rgb(30 50 60 / 18%);color:var(--ink)}\n  .book-cover-fallback span{font-size:.58rem;letter-spacing:.18em;font-weight:700;color:var(--blue-deep)}\n  .book-cover-fallback strong{font-family:var(--font-display);font-size:1.25rem;line-height:1.2}\n  .book-cover-fallback small{font-size:.68rem;color:var(--muted)}
   .book-card__cover--placeholder{background:linear-gradient(145deg,#e4eee8,#f4e8df)}
   .book-placeholder{height:100%;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:var(--blue-deep)}
   .book-placeholder span{font-size:3.5rem}
