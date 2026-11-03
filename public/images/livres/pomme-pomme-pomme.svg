@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-labelledby="title desc">
+<title id="title">Pomme pomme pomme — Corinne Dreyfuss</title>
+<desc id="desc">Couverture illustrée originale avec une grande pomme rouge, des feuilles vertes et deux petits animaux curieux.</desc>
+<defs>
+ <linearGradient id="paper" x2="0" y2="1"><stop stop-color="#fff9e9"/><stop offset="1" stop-color="#f4e6c8"/></linearGradient>
+ <radialGradient id="apple" cx="35%" cy="28%" r="75%"><stop stop-color="#ff7770"/><stop offset=".55" stop-color="#e52e2b"/><stop offset="1" stop-color="#a91520"/></radialGradient>
+ <linearGradient id="leaf" x2="1" y2="1"><stop stop-color="#a8c95d"/><stop offset="1" stop-color="#3d7a39"/></linearGradient>
+</defs>
+<rect width="600" height="800" fill="url(#paper)"/>
+<path d="M0 110Q100 15 205 70M600 95Q500 10 410 65" fill="none" stroke="#805b37" stroke-width="9"/>
+<g fill="url(#leaf)"><ellipse cx="100" cy="65" rx="48" ry="22" transform="rotate(25 100 65)"/><ellipse cx="190" cy="48" rx="45" ry="20" transform="rotate(-25 190 48)"/><ellipse cx="490" cy="52" rx="48" ry="22" transform="rotate(-25 490 52)"/><ellipse cx="555" cy="105" rx="42" ry="19" transform="rotate(35 555 105)"/></g>
+<text x="300" y="145" text-anchor="middle" font-family="Georgia,serif" font-size="29" fill="#55402e">Corinne Dreyfuss</text>
+<g font-family="Trebuchet MS, sans-serif" font-weight="900" text-anchor="middle">
+ <text x="300" y="260" font-size="100" fill="#d92b2b">Pomme</text>
+ <text x="300" y="355" font-size="100" fill="#ee9a21">pomme</text>
+ <text x="300" y="450" font-size="100" fill="#5d923d">pomme</text>
+</g>
+<path d="M295 505q-30-70 12-105q-4 56 22 72" fill="#70452b" stroke="#5b3826" stroke-width="8"/>
+<path d="M315 460q100-90 185-8q-86 55-185 8" fill="url(#leaf)" stroke="#47733a" stroke-width="5"/>
+<path d="M300 495C215 445 92 505 112 640c15 105 120 130 188 94 68 36 173 11 188-94 20-135-103-195-188-145Z" fill="url(#apple)" stroke="#a91c22" stroke-width="8"/>
+<path d="M170 560q20-45 65-47" fill="none" stroke="#ffb0a0" stroke-width="13" stroke-linecap="round" opacity=".65"/>
+<g><circle cx="105" cy="610" r="47" fill="#a96b3f"/><circle cx="88" cy="602" r="6" fill="#29221d"/><circle cx="120" cy="602" r="6" fill="#29221d"/><ellipse cx="105" cy="621" rx="13" ry="9" fill="#f0d1a9"/><path d="M96 633q9 10 18 0" fill="none" stroke="#38271e" stroke-width="3"/></g>
+<g><circle cx="500" cy="625" r="31" fill="#b8aaa0"/><circle cx="480" cy="598" r="15" fill="#c9b9ad"/><circle cx="520" cy="598" r="15" fill="#c9b9ad"/><circle cx="490" cy="622" r="4" fill="#29221d"/><circle cx="510" cy="622" r="4" fill="#29221d"/><path d="M496 632q4 5 8 0" fill="none" stroke="#4a3830" stroke-width="2"/></g>
+<path d="M0 740q150-40 300 0t300 0v60H0Z" fill="#8cae54"/>
+<text x="300" y="775" text-anchor="middle" font-family="Georgia,serif" font-size="24" fill="#fff8e9">Une histoire à croquer !</text>
+</svg>
