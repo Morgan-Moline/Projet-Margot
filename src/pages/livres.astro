@@ -19,6 +19,7 @@ const books = [
   { title: 'Bonsoir lune', author: 'Margaret Wise Brown', illustrator: 'Clement Hurd', summary: 'Un petit lapin dit bonne nuit aux objets et aux éléments qui l’entourent dans sa chambre. Un grand classique pour accompagner le rituel du coucher.', theme: 'Animaux et sommeil', cover: 'https://williamcrocodile.com/cdn/shop/products/image_04d4c6cd-1d77-4fa9-9999-322c28467053_1024x1024.jpg?v=1666875148', coverAlt: 'Couverture de Bonsoir lune' },
   { title: 'Bon…', author: 'Jeanne Ashbé', illustrator: 'Jeanne Ashbé', summary: 'Un petit canard sort de son œuf, plonge dans l’eau puis s’envole. Deux, trois et bientôt de nombreux autres canetons l’imitent. Un album rythmé pour jouer avec les sons et les mots.', theme: 'Animaux et sommeil', cover: 'https://media.recyclivre.com/catalog/products/51/b4/59/6f/51b4596f-3545-4c72-9f41-da2a88748e39.jpg?class=medium', coverAlt: 'Couverture de Bon… de Jeanne Ashbé' },
   { title: '2 petites mains et 2 petits pieds', author: 'Mem Fox', illustrator: 'Helen Oxenbury', summary: 'Une comptine présente des bébés nés dans différents endroits du monde. Malgré leurs différences, ils ont tous deux petites mains et deux petits pieds. Une histoire sur la diversité et l’égalité.', theme: 'Comptines et premières découvertes', cover: 'https://www.mediatheque-pirey.fr/images/covers/2-PETITES-MAINS-ET-2-PETITS-PIEDS_FOX-MEM-9782075095174.jpg', coverAlt: 'Couverture de 2 petites mains et 2 petits pieds' },
+  { title: 'Pomme pomme pomme', author: 'Corinne Dreyfuss', illustrator: 'Corinne Dreyfuss', summary: 'Une histoire rythmée et ludique autour d’une pomme, avec des répétitions qui invitent les tout-petits à observer, anticiper et participer à la lecture.', theme: 'Comptines et premières découvertes', cover: '/images/livres/pomme-pomme-pomme.svg', coverAlt: 'Couverture illustrée de Pomme pomme pomme' },
   { title: 'Une poule sur un mur', author: 'Thierry Dedieu', illustrator: 'Thierry Dedieu', summary: 'La célèbre comptine « Une poule sur un mur » est mise en images avec humour et en noir et blanc. Un album grand format pensé pour les tout-petits.', theme: 'Comptines et premières découvertes', cover: 'https://static.fnac-static.com/multimedia/PE/Images/FR/NR/44/20/a5/10821700/1540-1/tsp20260505085621/Une-poule-sur-un-mur.jpg', coverAlt: 'Couverture de Une poule sur un mur de Thierry Dedieu' },
   { title: 'Comme ça', author: 'Claire Lebourg', illustrator: 'Claire Lebourg', summary: 'Le jour de la naissance d’un enfant, une nouvelle vie commence. Avec tendresse, l’album raconte le quotidien d’une famille, ses joies, ses inquiétudes et ses retrouvailles.', theme: 'Comptines et premières découvertes', cover: 'https://www.editions-memo.fr/wp-content/uploads/bfi_thumb/COMME_CA_DP150-1-75rhtia93yx0n4sk28260dvgs86b1gcace8iw1ujvxf.jpg', coverAlt: 'Couverture de Comme ça' },
   { title: 'Un amour profond', author: 'Stephen Hogtun', illustrator: 'Stephen Hogtun', translator: 'Lyse Leroy', summary: 'Une maman baleine met au monde son petit, le guide, le nourrit et lui apprend à vivre. Lorsqu’il devient grand, vient le moment de la séparation, mais le chant d’amour de sa mère continue de l’accompagner.', theme: 'Famille et tendresse', cover: 'https://www.placedesenseignants.com/media/image/f0/aa/8c24cafbe386061e575599456b67.png', coverAlt: 'Couverture de Un amour profond' },
@@ -39,7 +40,7 @@ const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
   <section class="section books-section">
     <div class="container">
       <div class="books-intro">
-        <div><p class="eyebrow">La bibliothèque du projet</p><h2>20 histoires à découvrir</h2></div>
+        <div><p class="eyebrow">La bibliothèque du projet</p><h2>21 histoires à découvrir</h2></div>
         <p>Chaque livre est présenté avec son auteur, son illustrateur lorsqu’il est identifié et un court résumé. Les références qui restent à confirmer sont signalées en toute transparence.</p>
       </div>
       <nav class="book-filters" aria-label="Filtrer les livres par thème">
@@ -122,8 +123,8 @@ const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
   .book-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
   .book-card{overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);display:flex;flex-direction:column}
   .book-card[hidden]{display:none}
-  .book-card__cover{height:280px;padding:1rem;background:linear-gradient(145deg,#e7eff0,#f7eee7);display:grid;place-items:center}
-  .book-card__cover img{height:100%;width:100%;object-fit:contain;filter:drop-shadow(0 8px 10px rgb(30 50 60 / 14%))}
+  .book-card__cover{height:280px;min-height:280px;flex:0 0 280px;padding:1rem;background:linear-gradient(145deg,#e7eff0,#f7eee7);display:grid;place-items:center}
+  .book-card__cover img{display:block;height:100%;width:100%;max-width:100%;min-width:0;object-fit:contain;filter:drop-shadow(0 8px 10px rgb(30 50 60 / 14%))}
   .book-cover-fallback{height:100%;width:min(100%,210px);aspect-ratio:3/4;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding:1.4rem 1rem;background:linear-gradient(145deg,#dceaf3,#f8f6f1 58%,#f3e9ce);border:8px solid #fffefa;outline:1px solid #d8d3c8;box-shadow:0 8px 18px rgb(30 50 60 / 18%);color:var(--ink)}
   .book-cover-fallback span{font-size:.58rem;letter-spacing:.18em;font-weight:700;color:var(--blue-deep)}
   .book-cover-fallback strong{font-family:var(--font-display);font-size:1.25rem;line-height:1.2}
@@ -132,12 +133,12 @@ const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
   .book-placeholder{height:100%;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:var(--blue-deep)}
   .book-placeholder span{font-size:3.5rem}
   .book-placeholder small{font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
-  .book-card__body{padding:1.25rem;display:flex;flex-direction:column;flex:1}
+  .book-card__body{min-width:0;overflow-wrap:anywhere;padding:1.25rem;display:flex;flex-direction:column;flex:1}
   .book-card__theme{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--blue-deep);font-weight:700;margin-bottom:.55rem}
   .book-card h3{font-size:1.35rem;margin-bottom:.6rem}
   .book-card__author{font-size:.82rem;color:var(--muted);margin:0 0 .5rem;line-height:1.5}
-  .book-card__summary{font-size:.92rem;color:#465e69;margin:.65rem 0 0}
+  .book-card__summary{min-width:0;overflow-wrap:anywhere;word-break:normal;font-size:.92rem;color:#465e69;margin:.65rem 0 0}
   .books-note{margin:2rem 0 0;padding:1rem 1.2rem;border-left:3px solid #b8cbd2;background:var(--paper);color:var(--muted);font-size:.85rem}
   @media(max-width:850px){.book-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.books-intro{grid-template-columns:1fr;gap:1rem}}
-  @media(max-width:560px){.book-grid{grid-template-columns:1fr}.book-card__cover{height:300px}.book-filters{gap:.45rem}.book-filter{font-size:.8rem}}
+  @media(max-width:560px){.book-grid{grid-template-columns:1fr}.book-card__cover{height:300px;min-height:300px;flex-basis:300px}.book-filters{gap:.45rem}.book-filter{font-size:.8rem}}
 </style>
