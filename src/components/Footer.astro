@@ -10,5 +10,10 @@ const year = new Date().getFullYear();
     </div>
     <nav aria-label="Navigation de pied de page"><ul>{links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}</ul></nav>
   </div>
+  <div class="container footer__legal" aria-label="Informations légales">
+    <a href={`${base}/mentions-legales`}>Mentions légales</a>
+    <a href={`${base}/confidentialite`}>Politique de confidentialité</a>
+    <a href={`${base}/cookies`}>Cookies et traceurs</a>
+  </div>
   <div class="container footer__bottom"><span>© {year} – Je lis pour toi</span><a href={`${base}/contact`}>Une question sur le projet ?</a></div>
 </footer>
