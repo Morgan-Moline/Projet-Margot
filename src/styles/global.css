@@ -14,3 +14,5 @@
 .footer__legal{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid #ffffff30;font-size:.9rem}
 .footer__legal a{color:#d9e5e8;text-decoration:underline;text-underline-offset:3px}
 .footer__legal a:hover{color:white}
+
+.footer__credits{margin-top:.8rem;padding-top:.8rem;border-top:1px solid #ffffff18;text-align:center;color:#aebdc1;font-size:.78rem;letter-spacing:.02em}
