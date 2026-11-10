@@ -17,7 +17,7 @@ import { books, giftBook, themes } from '../data/livres';
     <div class="container">
       <div class="books-intro">
         <div><p class="eyebrow">La bibliothèque du projet</p><h2>{books.length} histoires à découvrir</h2></div>
-        <p>Chaque livre est présenté avec son auteur, son illustrateur lorsqu’il est identifié et un court résumé. Les références qui restent à confirmer sont signalées en toute transparence.</p>
+        <p>Chaque livre est présenté avec son auteur, son illustrateur lorsqu’il est identifié et un court résumé.</p>
       </div>
       <div class="book-filters" role="group" aria-label="Filtrer les livres par thème" hidden>
         {themes.map((theme, index) => <button type="button" class="book-filter" data-theme={theme} aria-pressed={index === 0 ? 'true' : 'false'} aria-controls="livres">{theme}</button>)}

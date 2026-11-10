@@ -1,0 +1,18 @@
+---
+import { rendezVous } from '../data/rendez-vous';
+
+interface Props {
+  /** `resume` pour une présentation courte, `detail` pour la version complète. */
+  texte?: 'resume' | 'detail';
+}
+const { texte = 'resume' } = Astro.props;
+---
+<div class="schedule">
+  {rendezVous.map((item) => (
+    <article class="schedule__item">
+      <span class="schedule__day">{item.jour}</span>
+      <h3>{item.titre}</h3>
+      <p>{item[texte]}</p>
+    </article>
+  ))}
+</div>

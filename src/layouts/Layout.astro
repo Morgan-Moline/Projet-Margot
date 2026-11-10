@@ -1,5 +1,5 @@
 ---
-import { getImage } from 'astro:assets';
+import { Font, getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { base } from '../data/nav';
@@ -13,7 +13,7 @@ interface Props {
 
 const {
   title,
-  description = 'Je lis pour toi : des lectures auprès des bébés hospitalisés en néonatologie, pour créer du lien et partager un moment avec leurs parents.',
+  description = 'Je lis pour toi : des lectures auprès des bébés hospitalisés en néonatologie à l’hôpital Necker, à Paris, pour créer du lien et partager un moment avec leurs parents.',
 } = Astro.props;
 
 const fullTitle = `${title} | Je lis pour toi`;
@@ -31,6 +31,7 @@ const ogImageUrl = new URL(ogImage.src, Astro.site);
     <meta name="theme-color" content="#f8f6f1" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <link rel="sitemap" href={`${base}/sitemap-index.xml`} />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
@@ -44,9 +45,8 @@ const ogImageUrl = new URL(ogImage.src, Astro.site);
     <meta property="og:image:alt" content="Illustration Je lis pour toi : un oiseau posé sur un livre ouvert" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap" />
+    <Font cssVariable="--font-dm-sans" preload={[{ weight: 400, style: 'normal' }]} />
+    <Font cssVariable="--font-playfair" preload={[{ weight: 600, style: 'normal' }]} />
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>

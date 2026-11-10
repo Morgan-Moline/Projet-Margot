@@ -1,0 +1,15 @@
+---
+interface Props {
+  items: { titre: string; texte: string }[];
+}
+const { items } = Astro.props;
+---
+<div class="cards">
+  {items.map((item, i) => (
+    <article class="info-card">
+      <div class="info-card__number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
+      <h3>{item.titre}</h3>
+      <p set:html={item.texte} />
+    </article>
+  ))}
+</div>
