@@ -245,40 +245,159 @@ h3 {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* ----- Menu : plein écran sur mobile, panneau latéral sur grand écran ----- */
+/* ----- Menu « nuage » -----
+   Le ciel s'éclaircit, deux petites bulles sortent du bouton,
+   puis le nuage se gonfle doucement et les liens apparaissent un à un. */
 .menu {
   position: fixed;
-  inset: 0;
+  inset: var(--header-h) 0 0 0;
   z-index: 55;
-  background: var(--ink);
-  color: white;
-  padding: calc(var(--header-h) + 1.5rem) 1rem 2rem;
-  display: grid;
-  align-content: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 6.5rem 0 3rem;
+  background:
+    radial-gradient(circle at 88% 0%, rgb(220 234 243 / 90%), transparent 55%),
+    radial-gradient(circle at 10% 100%, rgb(243 233 206 / 55%), transparent 50%),
+    rgb(248 246 241 / 72%);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   visibility: hidden;
   opacity: 0;
   transition:
-    opacity 0.25s,
-    visibility 0s 0.25s;
-  overflow: auto;
-  overscroll-behavior: contain;
+    opacity 0.25s ease 0.1s,
+    visibility 0s 0.35s;
 }
 .menu.is-open {
   visibility: visible;
   opacity: 1;
-  transition: opacity 0.25s;
+  transition: opacity 0.45s ease;
+}
+.menu__inner {
+  position: relative;
+  width: min(100% - 2rem, var(--container));
+  margin-inline: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Bulles qui relient le bouton au nuage */
+.menu__trail {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 4px 12px rgb(49 93 112 / 16%);
+  transform: scale(0);
+  transition: transform 0.15s ease;
+}
+.menu__trail--1 {
+  width: 14px;
+  height: 14px;
+  top: -92px;
+  right: 3.1rem;
+}
+.menu__trail--2 {
+  width: 24px;
+  height: 24px;
+  top: -70px;
+  right: 3.6rem;
+}
+.menu.is-open .menu__trail {
+  transform: scale(1);
+  transition: transform 0.4s cubic-bezier(0.34, 1.6, 0.6, 1);
+}
+.menu.is-open .menu__trail--2 {
+  transition-delay: 0.09s;
+}
+
+/* Le nuage : un corps arrondi et des « bouffées » rondes de la même couleur */
+.menu__cloud {
+  --cloud: #fffefa;
+  position: relative;
+  width: min(100%, 450px);
+  transform-origin: 85% -80px;
+  opacity: 0;
+  transform: scale(0.55);
+  filter: blur(10px) drop-shadow(0 16px 28px rgb(49 93 112 / 18%));
+  transition:
+    transform 0.25s ease,
+    opacity 0.2s ease,
+    filter 0.25s ease;
+}
+.menu.is-open .menu__cloud {
+  opacity: 1;
+  transform: none;
+  filter: blur(0) drop-shadow(0 16px 28px rgb(49 93 112 / 18%));
+  transition:
+    transform 0.65s cubic-bezier(0.34, 1.4, 0.6, 1) 0.18s,
+    opacity 0.35s ease 0.18s,
+    filter 0.55s ease 0.18s;
+}
+.menu__puff {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--cloud);
+}
+.menu__puff--1 {
+  width: 120px;
+  height: 120px;
+  top: -46px;
+  left: 12%;
+}
+.menu__puff--2 {
+  width: 150px;
+  height: 150px;
+  top: -64px;
+  left: 38%;
+}
+.menu__puff--3 {
+  width: 100px;
+  height: 100px;
+  top: -36px;
+  right: 7%;
+}
+.menu__puff--4 {
+  width: 96px;
+  height: 96px;
+  top: 32%;
+  left: -26px;
+}
+.menu__puff--5 {
+  width: 84px;
+  height: 84px;
+  bottom: 20%;
+  right: -24px;
+}
+.menu__puff--6 {
+  width: 120px;
+  height: 120px;
+  bottom: -38px;
+  left: 20%;
+}
+.menu__puff--7 {
+  width: 90px;
+  height: 90px;
+  bottom: -28px;
+  right: 18%;
 }
 .menu__content {
-  width: min(100%, 650px);
-  margin: auto;
-  transform: translateY(-10px);
-  transition: transform 0.25s;
+  position: relative;
+  z-index: 1;
+  padding: 2.25rem 1.5rem 1.75rem;
+  border-radius: 64px 64px 56px 56px;
+  background: radial-gradient(ellipse 70% 60% at 45% 45%, #e8eff9, var(--cloud) 78%);
+  color: var(--ink);
 }
-.menu.is-open .menu__content {
-  transform: none;
+.menu__birds {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.75rem;
+  width: 64px;
+  height: auto;
+  color: #a79c92;
 }
 .menu .eyebrow {
-  color: #b9d4df;
+  color: var(--blue-deep);
   padding-inline: 1rem;
 }
 .menu__list {
@@ -286,18 +405,37 @@ h3 {
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 0.25rem;
+  gap: 0.15rem;
 }
+.menu__list li {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+.menu.is-open .menu__list li {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+.menu.is-open .menu__list li:nth-child(1) { transition-delay: 0.34s; }
+.menu.is-open .menu__list li:nth-child(2) { transition-delay: 0.4s; }
+.menu.is-open .menu__list li:nth-child(3) { transition-delay: 0.46s; }
+.menu.is-open .menu__list li:nth-child(4) { transition-delay: 0.52s; }
+.menu.is-open .menu__list li:nth-child(5) { transition-delay: 0.58s; }
 .menu__list a {
   display: flex;
   align-items: baseline;
-  gap: 1.25rem;
-  padding: 0.6rem 1rem;
-  border-radius: 12px;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
   text-decoration: none;
-  color: white;
+  color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(1.9rem, 6vw, 2.6rem);
+  font-size: clamp(1.6rem, 5vw, 2rem);
   line-height: 1.2;
   transition:
     background 0.2s,
@@ -305,16 +443,15 @@ h3 {
 }
 .menu__list a:hover,
 .menu__list a:focus-visible {
-  background: #ffffff14;
-  color: #d7e8ef;
+  background: var(--blue);
+  color: var(--blue-deep);
 }
 .menu__list a:focus-visible {
   outline: 3px solid #d49b55;
   outline-offset: 2px;
 }
 .menu__list a[aria-current="page"] {
-  background: #ffffff1f;
-  color: #fff;
+  background: var(--blue);
 }
 .menu__list a[aria-current="page"]::after {
   content: "Vous êtes ici";
@@ -332,59 +469,43 @@ h3 {
 .menu__num {
   font-family: var(--font-sans);
   font-size: 0.85rem;
-  color: #a9cbd8;
+  color: #7f98a3;
 }
 .menu__note {
-  margin: 2rem 1rem 0;
-  color: #c5d2d6;
+  margin: 1.5rem 1rem 0;
+  color: var(--muted);
   font-style: italic;
+}
+.menu__note::before {
+  content: "★ ";
+  color: #e2b04a;
+  font-style: normal;
 }
 .menu__secondary {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1.25rem;
-  margin: 1.5rem 1rem 0;
-  padding-top: 1.25rem;
-  border-top: 1px solid #ffffff26;
+  margin: 1.25rem 1rem 0;
+  padding-top: 1rem;
+  border-top: 1px dashed #c9d6dc;
   font-size: 0.9rem;
 }
 .menu__secondary a {
-  color: #d9e5e8;
+  color: var(--blue-deep);
   text-underline-offset: 3px;
 }
-.menu__secondary a:hover {
-  color: #fff;
-}
-@media (max-width: 850px) {
-  .header.is-open {
-    background: var(--ink);
-    border-color: transparent;
-  }
-  .header.is-open .header__brand {
-    color: var(--cream);
-  }
-}
-@media (min-width: 851px) {
+@media (max-width: 560px) {
   .menu {
-    inset: var(--header-h) 0 0 0;
-    padding: 0;
-    display: flex;
-    justify-content: flex-end;
-    background: rgb(32 54 64 / 45%);
-    cursor: pointer;
+    padding-top: 6rem;
+  }
+  .menu__puff--4 {
+    left: -14px;
+  }
+  .menu__puff--5 {
+    right: -14px;
   }
   .menu__content {
-    width: min(460px, 100%);
-    min-height: 100%;
-    margin: 0;
-    padding: 2.5rem 1.5rem;
-    background: var(--ink);
-    box-shadow: -12px 0 40px rgb(0 0 0 / 22%);
-    cursor: auto;
-    transform: translateX(24px);
-  }
-  .menu__list a {
-    font-size: 2.1rem;
+    padding-inline: 0.75rem;
   }
 }
 .hero {
@@ -420,7 +541,7 @@ h3 {
   box-shadow: var(--shadow);
 }
 .hero__image:after {
-  content: "Lectures en néonatalogie";
+  content: "Lectures en néonatologie";
   position: absolute;
   bottom: 1.2rem;
   left: -1.2rem;
@@ -771,4 +892,23 @@ h3 {
   color: #aebdc1;
   font-size: 0.78rem;
   letter-spacing: 0.02em;
+}
+
+/* Très petits écrans : on garde l'icône seule pour que le nom du site tienne sur une ligne
+   (le libellé reste lu par les lecteurs d'écran). */
+.header__brand span {
+  white-space: nowrap;
+}
+@media (max-width: 360px) {
+  .burger {
+    padding: 0 0.85rem;
+  }
+  .burger__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
 }

@@ -17,22 +17,34 @@ const path = Astro.url.pathname;
   </div>
 </header>
 <nav class="menu" id="menu" aria-label="Navigation principale">
-  <div class="menu__content">
-    <p class="eyebrow">Explorer le projet</p>
-    <ul class="menu__list">
-      {links.map((link, i) => (
-        <li>
-          <a href={link.href} aria-current={isActive(link.href, path) ? 'page' : undefined}>
-            <span class="menu__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-            <span>{link.label}</span>
-          </a>
-        </li>
-      ))}
-    </ul>
-    <p class="menu__note">Une histoire, une voix, un moment partagé.</p>
-    <div class="menu__secondary">
-      <a href={`${base}/mentions-legales`}>Mentions légales</a>
-      <a href={`${base}/confidentialite`}>Confidentialité</a>
+  <div class="menu__inner">
+    <span class="menu__trail menu__trail--1" aria-hidden="true"></span>
+    <span class="menu__trail menu__trail--2" aria-hidden="true"></span>
+    <div class="menu__cloud">
+      {[1, 2, 3, 4, 5, 6, 7].map((n) => <span class={`menu__puff menu__puff--${n}`} aria-hidden="true"></span>)}
+      <div class="menu__content">
+        <svg class="menu__birds" viewBox="0 0 64 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <path d="M4 12c3-4 6-4 8 0 2-4 5-4 8 0" />
+          <path d="M40 6c2-3 4-3 6 0 1.5-3 3.5-3 6 0" />
+          <path d="M34 20c1.5-2 3-2 4 0 1-2 2.5-2 4 0" />
+        </svg>
+        <p class="eyebrow">Explorer le projet</p>
+        <ul class="menu__list">
+          {links.map((link, i) => (
+            <li>
+              <a href={link.href} aria-current={isActive(link.href, path) ? 'page' : undefined}>
+                <span class="menu__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <span>{link.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="menu__note">Une histoire, une voix, un moment partagé.</p>
+        <div class="menu__secondary">
+          <a href={`${base}/mentions-legales`}>Mentions légales</a>
+          <a href={`${base}/confidentialite`}>Confidentialité</a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
@@ -86,9 +98,9 @@ const path = Astro.url.pathname;
     }
   });
 
-  // Un clic sur le fond assombri (à côté du panneau) ferme le menu.
+  // Un clic à côté du nuage ferme le menu.
   menu?.addEventListener('click', (event) => {
-    if (event.target === menu) setOpen(false);
+    if (!(event.target as Element).closest('.menu__cloud')) setOpen(false);
   });
 
   menu?.querySelectorAll('a').forEach((link) =>

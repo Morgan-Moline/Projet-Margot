@@ -1,4 +1,4 @@
-# Je lis pour toi – Lectures en néonatalogie
+# Je lis pour toi – Lectures en néonatologie
 
 Première version du site vitrine du projet « Je lis pour toi », réalisée avec Astro et Node.js.
 
