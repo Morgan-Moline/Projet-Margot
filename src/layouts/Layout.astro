@@ -9,10 +9,13 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  /** Empêche l’indexation par les moteurs de recherche (ex. page 404). */
+  noindex?: boolean;
 }
 
 const {
   title,
+  noindex = false,
   description = 'Je lis pour toi : des lectures auprès des bébés hospitalisés en néonatologie à l’hôpital Necker, à Paris, pour créer du lien et partager un moment avec leurs parents.',
 } = Astro.props;
 
@@ -29,7 +32,7 @@ const ogImageUrl = new URL(ogImage.src, Astro.site);
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f8f6f1" />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
     <link rel="sitemap" href={`${base}/sitemap-index.xml`} />
 

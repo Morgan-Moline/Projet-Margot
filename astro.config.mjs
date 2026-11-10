@@ -19,7 +19,7 @@ const file = (pkg, weight, style = 'normal') => ({
 export default defineConfig({
   site: 'https://morgan-moline.github.io',
   base: '/Projet-Margot',
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/404') })],
   fonts: [
     {
       name: 'DM Sans',
