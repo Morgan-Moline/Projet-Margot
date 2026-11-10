@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
 import { base } from '../data/nav';
+import illustration from '../assets/je-lis-pour-toi.jpg';
 ---
 <Layout title="Accueil">
   <section class="hero">
@@ -11,7 +13,7 @@ import { base } from '../data/nav';
         <p class="lead">« Je lis pour toi » propose des temps de lecture auprès des bébés hospitalisés, en présence de leurs parents. Un moment de douceur pour se rencontrer, se rapprocher et partager.</p>
         <a class="btn" href={`${base}/a-propos`}>Découvrir le projet <span aria-hidden="true">→</span></a>
       </div>
-      <div class="hero__image"><img src={`${base}/images/je-lis-pour-toi.JPG`} alt="Illustration du projet Je lis pour toi – Lectures en néonatalogie" fetchpriority="high" /></div>
+      <div class="hero__image"><Image src={illustration} alt="Illustration du projet Je lis pour toi – Lectures en néonatalogie" widths={[560, 800, 1120, 1600]} sizes="(max-width: 850px) min(560px, calc(100vw - 2.5rem)), 740px" loading="eager" fetchpriority="high" /></div>
     </div>
   </section>
 
@@ -49,13 +51,13 @@ import { base } from '../data/nav';
     <div class="container">
       <div class="section__heading"><p class="eyebrow">La lecture en images</p><h2>Quelques instants autour des histoires.</h2><p>Découvrez les vidéos de présentation du projet et de son univers.</p></div>
       <div class="video-grid">
-        <article class="video-card"><video controls preload="metadata" playsinline><source src={`${base}/videos/je-lis-pour-toi.mp4`} type="video/mp4" />Votre navigateur ne prend pas en charge la lecture vidéo.</video><h3>Je lis pour toi</h3><p>Présentation du projet de lecture en néonatalogie.</p></article>
-        <article class="video-card"><video controls preload="metadata" playsinline><source src={`${base}/videos/plume-et-lune.mp4`} type="video/mp4" />Votre navigateur ne prend pas en charge la lecture vidéo.</video><h3>Plume et Lune</h3><p>Une histoire à découvrir et à partager autour du livre.</p></article>
+        <article class="video-card"><video controls preload="none" playsinline width="1920" height="1080" poster={`${base}/videos/je-lis-pour-toi-poster.webp`}><source src={`${base}/videos/je-lis-pour-toi.mp4`} type="video/mp4" />Votre navigateur ne prend pas en charge la lecture vidéo.</video><h3>Je lis pour toi</h3><p>Présentation du projet de lecture en néonatalogie.</p></article>
+        <article class="video-card"><video controls preload="none" playsinline width="1920" height="1080" poster={`${base}/videos/plume-et-lune-poster.webp`}><source src={`${base}/videos/plume-et-lune.mp4`} type="video/mp4" />Votre navigateur ne prend pas en charge la lecture vidéo.</video><h3>Plume et Lune</h3><p>Une histoire à découvrir et à partager autour du livre.</p></article>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="container"><div class="cta-band"><div><p class="eyebrow" style="color:#c4dce5">Faire grandir le projet</p><h2>Un livre pour commencer une histoire ensemble.</h2><p>Le projet souhaite offrir un petit livre à chaque famille lors de son arrivée dans le service. Il recherche encore des financements pour faire vivre cette démarche. Les informations pour soutenir le projet seront ajoutées prochainement.</p></div><a class="btn" href={`${base}/a-propos`}>Comprendre cette démarche</a></div></div>
+    <div class="container"><div class="cta-band"><div><p class="eyebrow">Faire grandir le projet</p><h2>Un livre pour commencer une histoire ensemble.</h2><p>Le projet souhaite offrir un petit livre à chaque famille lors de son arrivée dans le service. Il recherche encore des financements pour faire vivre cette démarche. Les informations pour soutenir le projet seront ajoutées prochainement.</p></div><a class="btn" href={`${base}/a-propos`}>Comprendre cette démarche</a></div></div>
   </section>
 </Layout>

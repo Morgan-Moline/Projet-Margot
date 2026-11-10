@@ -1,11 +1,13 @@
 ---
+import { Image } from 'astro:assets';
 import { base, links, isActive } from '../data/nav';
+import logo from '../assets/je-lis-pour-toi.jpg';
 const path = Astro.url.pathname;
 ---
 <header class="header" id="site-header">
   <div class="container header__inner">
     <a class="header__brand" href={`${base}/`} aria-label="Je lis pour toi, accueil">
-      <img src={`${base}/images/je-lis-pour-toi.JPG`} alt="Je lis pour toi – Lectures en néonatalogie" />
+      <Image src={logo} alt="" width={54} height={54} densities={[1, 2]} fit="cover" loading="eager" />
       <span>Je lis pour toi</span>
     </a>
     <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">

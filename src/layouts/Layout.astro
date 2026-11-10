@@ -1,20 +1,52 @@
 ---
+import { getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { base } from '../data/nav';
+import illustration from '../assets/je-lis-pour-toi.jpg';
 import '../styles/global.css';
 
-interface Props { title: string; description?: string; }
-const { title, description = 'Je lis pour toi : des lectures auprès des bébés hospitalisés en néonatologie, pour créer du lien et partager un moment avec leurs parents.' } = Astro.props;
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Je lis pour toi : des lectures auprès des bébés hospitalisés en néonatologie, pour créer du lien et partager un moment avec leurs parents.',
+} = Astro.props;
+
+const fullTitle = `${title} | Je lis pour toi`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = await getImage({ src: illustration, width: 1200, format: 'jpg' });
+const ogImageUrl = new URL(ogImage.src, Astro.site);
 ---
 <!doctype html>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f8f6f1" />
-    <title>{title} | Je lis pour toi</title>
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Je lis pour toi" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content={String(ogImage.attributes.width)} />
+    <meta property="og:image:height" content={String(ogImage.attributes.height)} />
+    <meta property="og:image:alt" content="Illustration Je lis pour toi : un oiseau posé sur un livre ouvert" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap" />
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
