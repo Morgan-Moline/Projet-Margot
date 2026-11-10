@@ -1,37 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-
-const imageBase = `${import.meta.env.BASE_URL.replace(/\/?$/, '/') }images/livres/`;
-
-const books = [
-  { title: 'Sur les genoux de maman', author: 'Ann Herbert Scott', illustrator: 'Glo Coalson', summary: 'Michaël aime se blottir sur les genoux de sa maman avec ses jouets et ses affaires. Lorsque le bébé veut lui aussi trouver sa place, Michaël découvre qu’il faut apprendre à partager. Un album tendre sur l’arrivée d’un petit frère ou d’une petite sœur.', theme: 'Famille et tendresse', cover: imageBase + 'sur-les-genoux-de-maman.webp', coverAlt: 'Couverture de Sur les genoux de maman' },
-  { title: 'Devine combien je t’aime', author: 'Sam McBratney', illustrator: 'Anita Jeram', summary: 'À l’heure du coucher, Petit Lièvre Brun et Grand Lièvre Brun cherchent à se dire combien ils s’aiment. Un album tendre sur l’amour et les liens qui unissent parents et enfants.', theme: 'Famille et tendresse', cover: imageBase + 'Devine-combien-je-t-aime.jpg', coverAlt: 'Couverture de Devine combien je t’aime de Sam McBratney et Anita Jeram' },
-  { title: 'Je t’aime', author: 'Guillaume Olive', illustrator: 'Zhi Hong He', summary: 'Un enfant s’endort en se demandant ce que signifie « je t’aime ». Dans ses rêves, il interroge plusieurs animaux, qui lui donnent chacun leur définition de l’amour.', theme: 'Famille et tendresse', cover: imageBase + 'Je-t-aime.jpg', coverAlt: 'Couverture de Je t’aime de Guillaume Olive et Zhi Hong He' },
-  { title: 'Ma maman', author: 'Anthony Browne', illustrator: 'Anthony Browne', summary: 'Un petit garçon présente sa formidable maman et ses nombreux talents. Un album tendre et plein d’humour.', theme: 'Famille et tendresse', cover: imageBase + 'MA-MAMAN_ANTHONY-BROWNE-2211081878.jpg', coverAlt: 'Couverture de Ma maman' },
-  { title: 'Mon papa', author: 'Anthony Browne', illustrator: 'Anthony Browne', summary: 'Un enfant raconte toutes les qualités de son papa, qu’il imagine fort, drôle et capable de grandes choses. Une déclaration d’amour familiale.', theme: 'Famille et tendresse', cover: imageBase + 'mon-papa-anthony-browne.jpg', coverAlt: 'Couverture de Mon papa' },
-  { title: 'Je serai toujours là pour toi', author: 'Mark Sperring', illustrator: 'Layn Marlow', summary: 'Une histoire sur la présence, la protection et l’amour inconditionnel. Elle rassure l’enfant sur le fait qu’il pourra toujours compter sur quelqu’un.', theme: 'Famille et tendresse', cover: imageBase + 'Je-serai-toujours-la-pour-toi.jpg', coverAlt: 'Couverture de Je serai toujours là pour toi' },
-  { title: 'Si tu veux voir une baleine', author: 'Julie Fogliano', illustrator: 'Erin E. Stead', summary: 'Un enfant part à la recherche d’une baleine. Pour espérer l’apercevoir, il faut apprendre à attendre, observer et rester attentif au monde qui nous entoure.', theme: 'Découvertes et émotions', cover: imageBase + '9782877678063-475x500-1.jpg', coverAlt: 'Couverture de Si tu veux voir une baleine' },
-  { title: 'Quelque part sous les étoiles', author: 'Ramona Bădescu', illustrator: 'Amélie Jackowski', summary: 'Un petit ver vient au monde et découvre progressivement les formes, les couleurs, les plantes et les animaux qui l’entourent. Un album sensoriel sur les premiers instants de la vie.', theme: 'Découvertes et émotions', cover: imageBase + 'QUELQUE-PART-SOUS-LES-ETOILES_BADESCU-RAMONA-9782492768767.jpg', coverAlt: 'Couverture de Quelque part sous les étoiles' },
-  { title: 'Un cœur qui bat', author: 'Virginie Aladjidi', illustrator: 'Joëlle Jolivet', summary: 'Un album illustré qui invite à découvrir le corps, les sensations et le vivant à travers le symbole du cœur qui bat.', theme: 'Découvertes et émotions', cover: imageBase + '9782364749870.jpg', coverAlt: 'Couverture de Un cœur qui bat' },
-  { title: 'Bon voyage, bébé !', author: 'Béatrice Alemagna', illustrator: 'Béatrice Alemagna', summary: 'Les préparatifs du coucher de bébé sont racontés comme ceux d’un grand départ en voyage. Un album plein d’imagination autour du rituel du soir.', theme: 'Découvertes et émotions', cover: imageBase + 'BON-VOYAGE-BEBE_ALEMAGNA-BEATRICE-9782330022501.jpg', coverAlt: 'Couverture de Bon voyage bébé' },
-  { title: 'Abris', author: 'Emmanuelle Houdart', illustrator: 'Emmanuelle Houdart', summary: 'Du ventre maternel au berceau, de la maison à l’amour des proches, l’autrice explore les différentes formes de refuge et de protection dans un album aux phrases courtes et musicales.', theme: 'Découvertes et émotions', cover: imageBase + 'ABRIS_HOUDART-EMMANUELLE-9782369020318.jpg', coverAlt: 'Couverture de Abris' },
-  { title: 'Bébés chouettes', author: 'Martin Waddell', illustrator: 'Patrick Benson', summary: 'Trois petites chouettes se réveillent et constatent que leur maman est partie. Elles attendent son retour en se rassurant mutuellement. Une histoire sur la séparation et la confiance.', theme: 'Animaux et sommeil', cover: imageBase + 'CC63E991-3634-4451-9E8B-D2B78AA6381D_1024x1024.webp', coverAlt: 'Couverture de Bébés chouettes' },
-  { title: 'Mon Tout-Petit', author: 'Jo Weaver', illustrator: 'Jo Weaver', summary: 'Une maman ourse accompagne son petit dans ses premières découvertes au fil des saisons. Une histoire sur la relation parent-enfant et l’autonomie.', theme: 'Animaux et sommeil', cover: imageBase + 'Mon-Tout-Petit.jpg', coverAlt: 'Couverture de Mon Tout-Petit' },
-  { title: 'Chut ! Il ne faut pas réveiller les petits lapins qui dorment', author: 'Amélie Jackowski', illustrator: 'Amélie Jackowski', summary: 'Un album sur la nuit et ses sensations apaisantes, à lire doucement avant le coucher pour ne pas réveiller les petits lapins.', theme: 'Animaux et sommeil', cover: imageBase + 'Chut-il-ne-faut-pas-reveiller-les-petits-lapins-qui-dorment.jpg', coverAlt: 'Couverture de Chut ! Il ne faut pas réveiller les petits lapins qui dorment' },
-  { title: 'Bonsoir lune', author: 'Margaret Wise Brown', illustrator: 'Clement Hurd', summary: 'Un petit lapin dit bonne nuit aux objets et aux éléments qui l’entourent dans sa chambre. Un grand classique pour accompagner le rituel du coucher.', theme: 'Animaux et sommeil', cover: imageBase + 'image_04d4c6cd-1d77-4fa9-9999-322c28467053_1024x1024.webp', coverAlt: 'Couverture de Bonsoir lune' },
-  { title: 'Bon…', author: 'Jeanne Ashbé', illustrator: 'Jeanne Ashbé', summary: 'Un petit canard sort de son œuf, plonge dans l’eau puis s’envole. Deux, trois et bientôt de nombreux autres canetons l’imitent. Un album rythmé pour jouer avec les sons et les mots.', theme: 'Animaux et sommeil', cover: imageBase + '51b4596f-3545-4c72-9f41-da2a88748e39.webp', coverAlt: 'Couverture de Bon… de Jeanne Ashbé' },
-  { title: '2 petites mains et 2 petits pieds', author: 'Mem Fox', illustrator: 'Helen Oxenbury', summary: 'Une comptine présente des bébés nés dans différents endroits du monde. Malgré leurs différences, ils ont tous deux petites mains et deux petits pieds. Une histoire sur la diversité et l’égalité.', theme: 'Comptines et premières découvertes', cover: imageBase + '91tGoHtX6bL._SL1500_.jpg', coverAlt: 'Couverture de 2 petites mains et 2 petits pieds' },
-  { title: 'Pomme pomme pomme', author: 'Corinne Dreyfuss', illustrator: 'Corinne Dreyfuss', summary: 'Une histoire rythmée et ludique autour d’une pomme, avec des répétitions qui invitent les tout-petits à observer, anticiper et participer à la lecture.', theme: 'Comptines et premières découvertes', cover: imageBase + 'pomme-pomme-pomme.svg', coverAlt: 'Couverture illustrée de Pomme pomme pomme' },
-  { title: 'Une poule sur un mur', author: 'Thierry Dedieu', illustrator: 'Thierry Dedieu', summary: 'La célèbre comptine « Une poule sur un mur » est mise en images avec humour et en noir et blanc. Un album grand format pensé pour les tout-petits.', theme: 'Comptines et premières découvertes', cover: imageBase + 'Une-poule-sur-un-mur.jpg', coverAlt: 'Couverture de Une poule sur un mur de Thierry Dedieu' },
-  { title: 'Comme ça', author: 'Claire Lebourg', illustrator: 'Claire Lebourg', summary: 'Le jour de la naissance d’un enfant, une nouvelle vie commence. Avec tendresse, l’album raconte le quotidien d’une famille, ses joies, ses inquiétudes et ses retrouvailles.', theme: 'Comptines et premières découvertes', cover: imageBase + 'COMME_CA_DP150-1-75rhtia93yx0n4sk28260dvgs86b1gcace8iw1ujvxf.jpg', coverAlt: 'Couverture de Comme ça' },
-  { title: 'Un amour profond', author: 'Stephen Hogtun', illustrator: 'Stephen Hogtun', translator: 'Lyse Leroy', summary: 'Une maman baleine met au monde son petit, le guide, le nourrit et lui apprend à vivre. Lorsqu’il devient grand, vient le moment de la séparation, mais le chant d’amour de sa mère continue de l’accompagner.', theme: 'Famille et tendresse', cover: imageBase + '8c24cafbe386061e575599456b67.png', coverAlt: 'Couverture de Un amour profond' },
-  { title: 'À toi qui es là', author: 'Albane Gellé et 20 autres poètes et poétesses', illustrator: 'Maya McCallum', summary: 'Un recueil de 30 poèmes inédits écrits pour les nouveau-nés et leurs parents. Ces textes poétiques évoquent la grossesse, la naissance et le monde qui s’ouvre au bébé, pour partager un moment de lecture et de douceur.', theme: 'Famille et tendresse', cover: imageBase + '614l9Rpqg3L._SL1500_.jpg', coverAlt: 'Couverture de À toi qui es là, poésie pour nouveau-né' },
-];
-
-const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
+import { books, giftBook, themes } from '../data/livres';
 ---
 
-<Layout title="Livres">
+<Layout title="Livres" description="La sélection d’albums de la bibliothèque mobile « Je lis pour toi », avec auteurs, illustrateurs et résumés.">
   <section class="page-hero">
     <div class="container">
       <p class="eyebrow">Les histoires à partager</p>
@@ -43,22 +16,23 @@ const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
   <section class="section books-section">
     <div class="container">
       <div class="books-intro">
-        <div><p class="eyebrow">La bibliothèque du projet</p><h2>22 histoires à découvrir</h2></div>
-        <p>Chaque livre est présenté avec son auteur, son illustrateur lorsqu’il est identifié et un court résumé. Les références qui restent à confirmer sont signalées en toute transparence.</p>
+        <div><p class="eyebrow">La bibliothèque du projet</p><h2>{books.length} histoires à découvrir</h2></div>
+        <p>Chaque livre est présenté avec son auteur, son illustrateur lorsqu’il est identifié et un court résumé.</p>
       </div>
-      <nav class="book-filters" aria-label="Filtrer les livres par thème">
-        {themes.map((theme, index) => <a class:list={['book-filter', { 'is-active': index === 0 }]} href={index === 0 ? '#livres' : '#'} data-theme={theme}>{theme}</a>)}
-      </nav>
+      <div class="book-filters" role="group" aria-label="Filtrer les livres par thème" hidden>
+        {themes.map((theme, index) => <button type="button" class="book-filter" data-theme={theme} aria-pressed={index === 0 ? 'true' : 'false'} aria-controls="livres">{theme}</button>)}
+      </div>
+      <p class="visually-hidden" id="livres-statut" aria-live="polite"></p>
       <div class="book-grid" id="livres">
-        {books.map((book, index) => (
+        {books.map((book) => (
           <article class="book-card" data-book-theme={book.theme}>
-            <div class:list={['book-card__cover', { 'book-card__cover--placeholder': !book.cover }]}>
-              {book.cover ? <img src={book.cover} alt={book.coverAlt || `Couverture de ${book.title}`} loading="lazy" /> : <div class="book-placeholder"><span aria-hidden="true">📖</span><small>Couverture à confirmer</small></div>}
+            <div class="book-card__cover">
+              <Image src={book.cover} alt={book.coverAlt ?? `Couverture de ${book.title}`} height={280} densities={[1, 2]} loading="lazy" decoding="async" />
             </div>
             <div class="book-card__body">
               <span class="book-card__theme">{book.theme}</span>
               <h3>{book.title}</h3>
-              <p class="book-card__author"><strong>Auteur :</strong> {book.author}{book.illustrator ? <> · <strong>Illustration :</strong> {book.illustrator}</> : ''}</p>
+              <p class="book-card__author"><strong>Auteur :</strong> {book.author}{book.illustrator && <> · <strong>Illustration :</strong> {book.illustrator}</>}</p>
               {book.translator && <p class="book-card__author"><strong>Traduction :</strong> {book.translator}</p>}
               <p class="book-card__summary">{book.summary}</p>
             </div>
@@ -70,47 +44,30 @@ const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
 
   <section class="section section--soft">
     <div class="container split">
-      <div><h2>Des livres pour deux façons de partager.</h2><p>La bibliothèque mobile permet aux bénévoles de faire découvrir différents albums aux familles lors des temps de lecture dans le service. À chaque entrée dans le service, un seul livre est offert à la famille : <strong>Pablo</strong>, de Rascal. Ce livre lui appartient et peut être emporté à la maison.</p></div>
-      <div class="highlight"><span class="highlight__label">Le saviez-vous ?</span><div class="highlight__book"><img src={imageBase + '614QnWcgY7L._SL1500_.jpg'} alt="Couverture du livre Pablo de Rascal" loading="lazy" /><div><h3>Un livre offert à chaque famille : Pablo, de Rascal.</h3><p>Ce livre est remis à chaque entrée dans le service. C’est le seul album offert ; les autres livres sont disponibles dans la bibliothèque mobile pour être lus sur place avec les bénévoles.</p></div></div></div>
+      <div><h2>Des livres pour deux façons de partager.</h2><p>La bibliothèque mobile permet aux bénévoles de faire découvrir différents albums aux familles lors des temps de lecture dans le service. À chaque entrée dans le service, un seul livre est offert à la famille : <strong>{giftBook.title}</strong>, de {giftBook.author}. Ce livre lui appartient et peut être emporté à la maison.</p></div>
+      <div class="highlight"><span class="highlight__label">Le saviez-vous ?</span><div class="highlight__book"><Image src={giftBook.cover} alt={`Couverture du livre ${giftBook.title} de ${giftBook.author}`} width={190} densities={[1, 2]} loading="lazy" decoding="async" /><div><h3>Un livre offert à chaque famille : {giftBook.title}, de {giftBook.author}.</h3><p>Ce livre est remis à chaque entrée dans le service. C’est le seul album offert ; les autres livres sont disponibles dans la bibliothèque mobile pour être lus sur place avec les bénévoles.</p></div></div></div>
     </div>
   </section>
 </Layout>
 
 <script>
-  const filters = document.querySelectorAll('.book-filter');
-  const cards = document.querySelectorAll('.book-card');
+  const group = document.querySelector<HTMLElement>('.book-filters');
+  const filters = document.querySelectorAll<HTMLButtonElement>('.book-filter');
+  const cards = document.querySelectorAll<HTMLElement>('.book-card');
+  const status = document.getElementById('livres-statut');
+  // Les filtres ne servent qu’avec JavaScript : on ne les affiche qu’à ce moment-là.
+  if (group) group.hidden = false;
   filters.forEach((filter) => {
-    filter.addEventListener('click', (event) => {
-      event.preventDefault();
-      const theme = filter.getAttribute('data-theme');
-      filters.forEach((item) => item.classList.toggle('is-active', item === filter));
+    filter.addEventListener('click', () => {
+      const theme = filter.dataset.theme;
+      filters.forEach((item) => item.setAttribute('aria-pressed', String(item === filter)));
+      let visible = 0;
       cards.forEach((card) => {
-        card.hidden = theme !== 'Tous' && card.getAttribute('data-book-theme') !== theme;
+        card.hidden = theme !== 'Tous' && card.dataset.bookTheme !== theme;
+        if (!card.hidden) visible += 1;
       });
+      if (status) status.textContent = `${visible} livre${visible > 1 ? 's' : ''} affiché${visible > 1 ? 's' : ''}`;
     });
-  });
-  // Une image distante peut disparaître : on affiche alors une couverture de secours
-  // construite avec le titre et l'auteur, plutôt qu'un emplacement vide.
-  document.querySelectorAll<HTMLImageElement>('.book-card__cover img').forEach((img) => {
-    const showFallback = () => {
-      const card = img.closest('.book-card');
-      const title = card?.querySelector('h3')?.textContent?.trim() || 'Livre';
-      const author = card?.querySelector('.book-card__author')?.textContent?.replace('Auteur :', '').trim() || 'Je lis pour toi';
-      const fallback = document.createElement('div');
-      fallback.className = 'book-cover-fallback';
-      fallback.setAttribute('role', 'img');
-      fallback.setAttribute('aria-label', `Couverture de remplacement : ${title}, ${author}`);
-      const label = document.createElement('span');
-      label.textContent = 'JE LIS POUR TOI';
-      const heading = document.createElement('strong');
-      heading.textContent = title;
-      const credit = document.createElement('small');
-      credit.textContent = author;
-      fallback.append(label, heading, credit);
-      img.replaceWith(fallback);
-    };
-    img.addEventListener('error', showFallback, { once: true });
-    if (img.complete && img.naturalWidth === 0) showFallback();
   });
 </script>
 
@@ -121,27 +78,20 @@ const themes = ['Tous', ...new Set(books.map((book) => book.theme))];
   .books-intro h2{margin-bottom:0}
   .books-intro>p{color:var(--muted);max-width:58ch;margin:0}
   .book-filters{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2rem}
-  .book-filter{display:inline-flex;padding:.55rem .95rem;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);text-decoration:none;font-size:.88rem;font-weight:600;transition:background .2s,color .2s,border-color .2s}
-  .book-filter:hover,.book-filter.is-active{background:var(--blue-deep);border-color:var(--blue-deep);color:white}
+  .book-filters[hidden]{display:none}
+  .book-filter{display:inline-flex;font:inherit;cursor:pointer;padding:.55rem .95rem;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);text-decoration:none;font-size:.88rem;font-weight:600;transition:background .2s,color .2s,border-color .2s}
+  .book-filter:focus-visible{outline:3px solid #d49b55;outline-offset:2px}
+  .book-filter:hover,.book-filter[aria-pressed=true]{background:var(--blue-deep);border-color:var(--blue-deep);color:white}
   .book-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
   .book-card{min-width:0;overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);display:grid;grid-template-columns:minmax(130px,38%) minmax(0,1fr);align-items:stretch}
   .book-card[hidden]{display:none}
   .book-card__cover{height:auto;min-height:260px;min-width:0;padding:1rem;background:linear-gradient(145deg,#e7eff0,#f7eee7);display:flex;align-items:center;justify-content:center;overflow:hidden}
   .book-card__cover img{display:block;width:auto;height:auto;max-width:100%;max-height:280px;object-fit:contain;flex:0 1 auto;filter:drop-shadow(0 8px 10px rgb(30 50 60 / 14%))}
-  .book-cover-fallback{width:min(100%,190px);aspect-ratio:3/4;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding:1.2rem .8rem;background:linear-gradient(145deg,#dceaf3,#f8f6f1 58%,#f3e9ce);border:8px solid #fffefa;outline:1px solid #d8d3c8;box-shadow:0 8px 18px rgb(30 50 60 / 18%);color:var(--ink)}
-  .book-cover-fallback span{font-size:.58rem;letter-spacing:.18em;font-weight:700;color:var(--blue-deep)}
-  .book-cover-fallback strong{font-family:var(--font-display);font-size:1.15rem;line-height:1.2;overflow-wrap:anywhere}
-  .book-cover-fallback small{font-size:.68rem;color:var(--muted)}
-  .book-card__cover--placeholder{background:linear-gradient(145deg,#e4eee8,#f4e8df)}
-  .book-placeholder{height:100%;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:var(--blue-deep)}
-  .book-placeholder span{font-size:3.5rem}
-  .book-placeholder small{font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
   .book-card__body{min-width:0;overflow-wrap:anywhere;padding:1.25rem;display:flex;flex-direction:column;justify-content:center}
   .book-card__theme{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--blue-deep);font-weight:700;margin-bottom:.55rem}
   .book-card h3{font-size:1.25rem;margin-bottom:.6rem;overflow-wrap:anywhere}
   .book-card__author{font-size:.8rem;color:var(--muted);margin:0 0 .5rem;line-height:1.5;overflow-wrap:anywhere}
   .book-card__summary{min-width:0;overflow-wrap:anywhere;word-break:normal;font-size:.88rem;line-height:1.55;color:#465e69;margin:.55rem 0 0}
-  .books-note{margin:2rem 0 0;padding:1rem 1.2rem;border-left:3px solid #b8cbd2;background:var(--paper);color:var(--muted);font-size:.85rem}
   @media(max-width:850px){.book-grid{grid-template-columns:1fr}.books-intro{grid-template-columns:1fr;gap:1rem}}
   @media(max-width:560px){.book-card{grid-template-columns:minmax(105px,34%) minmax(0,1fr)}.book-card__cover{min-height:230px;padding:.65rem}.book-card__cover img{max-height:250px}.book-card__body{padding:1rem}.book-card h3{font-size:1.12rem}.book-card__summary{font-size:.84rem}.book-filters{gap:.45rem}.book-filter{font-size:.8rem}}
 </style>

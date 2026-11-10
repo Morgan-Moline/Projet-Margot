@@ -1,40 +1,112 @@
 ---
+import { Image } from 'astro:assets';
 import { base, links, isActive } from '../data/nav';
+import logo from '../assets/je-lis-pour-toi.jpg';
 const path = Astro.url.pathname;
 ---
 <header class="header" id="site-header">
   <div class="container header__inner">
     <a class="header__brand" href={`${base}/`} aria-label="Je lis pour toi, accueil">
-      <img src={`${base}/images/je-lis-pour-toi.JPG`} alt="Je lis pour toi – Lectures en néonatalogie" />
+      <Image src={logo} alt="" width={54} height={54} densities={[1, 2]} fit="cover" loading="eager" />
       <span>Je lis pour toi</span>
     </a>
-    <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
-      <span></span><span></span><span></span>
+    <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="menu">
+      <span class="burger__label">Menu</span>
+      <span class="burger__icon" aria-hidden="true"><span></span><span></span><span></span></span>
     </button>
   </div>
 </header>
 <nav class="menu" id="menu" aria-label="Navigation principale">
-  <div class="menu__content">
-    <p class="eyebrow">Explorer le projet</p>
-    <ul class="menu__list">
-      {links.map((link, i) => <li><a href={link.href} aria-current={isActive(link.href, path) ? 'page' : undefined}><span class="menu__num">{String(i + 1).padStart(2, '0')}</span><span>{link.label}</span></a></li>)}
-    </ul>
-    <p class="menu__note">Une histoire, une voix, un moment partagé.</p>
+  <div class="menu__inner">
+    <span class="menu__trail menu__trail--1" aria-hidden="true"></span>
+    <span class="menu__trail menu__trail--2" aria-hidden="true"></span>
+    <div class="menu__cloud">
+      {[1, 2, 3, 4, 5, 6, 7].map((n) => <span class={`menu__puff menu__puff--${n}`} aria-hidden="true"></span>)}
+      <div class="menu__content">
+        <svg class="menu__birds" viewBox="0 0 64 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <path d="M4 12c3-4 6-4 8 0 2-4 5-4 8 0" />
+          <path d="M40 6c2-3 4-3 6 0 1.5-3 3.5-3 6 0" />
+          <path d="M34 20c1.5-2 3-2 4 0 1-2 2.5-2 4 0" />
+        </svg>
+        <p class="eyebrow">Explorer le projet</p>
+        <ul class="menu__list">
+          {links.map((link, i) => (
+            <li>
+              <a href={link.href} aria-current={isActive(link.href, path) ? 'page' : undefined}>
+                <span class="menu__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <span>{link.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="menu__note">Une histoire, une voix, un moment partagé.</p>
+        <div class="menu__secondary">
+          <a href={`${base}/mentions-legales`}>Mentions légales</a>
+          <a href={`${base}/confidentialite`}>Confidentialité</a>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
 <script>
   const header = document.getElementById('site-header');
   const burger = document.getElementById('burger');
   const menu = document.getElementById('menu');
-  function setOpen(open: boolean) {
+  const label = burger?.querySelector('.burger__label');
+  // Éléments de la page rendus inactifs (clavier, lecteurs d'écran) quand le menu est ouvert.
+  const background = document.querySelectorAll<HTMLElement>('.skip-link, .header__brand, main, footer');
+
+  function setOpen(open: boolean, { restoreFocus = true } = {}) {
     if (!header || !burger || !menu) return;
     menu.classList.toggle('is-open', open);
     header.classList.toggle('is-open', open);
     document.body.classList.toggle('menu-open', open);
     burger.setAttribute('aria-expanded', String(open));
-    burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    if (label) label.textContent = open ? 'Fermer' : 'Menu';
+    background.forEach((el) => { el.inert = open; });
+    if (open) {
+      // Place le focus sur la page en cours (ou le premier lien) pour naviguer tout de suite au clavier.
+      const target = menu.querySelector<HTMLAnchorElement>('a[aria-current="page"]') ?? menu.querySelector('a');
+      target?.focus({ preventScroll: true });
+    } else if (restoreFocus) {
+      burger.focus();
+    }
   }
-  burger?.addEventListener('click', () => setOpen(burger.getAttribute('aria-expanded') !== 'true'));
-  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && burger?.getAttribute('aria-expanded') === 'true') { setOpen(false); burger.focus(); } });
-  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+
+  const isOpen = () => burger?.getAttribute('aria-expanded') === 'true';
+
+  burger?.addEventListener('click', () => setOpen(!isOpen()));
+
+  document.addEventListener('keydown', (event) => {
+    if (!isOpen() || !menu || !burger) return;
+    if (event.key === 'Escape') {
+      setOpen(false);
+      return;
+    }
+    // Garde le focus dans la boucle « bouton Fermer → liens du menu ».
+    if (event.key === 'Tab') {
+      const focusables = [burger, ...menu.querySelectorAll<HTMLElement>('a')];
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  // Un clic à côté du nuage ferme le menu.
+  menu?.addEventListener('click', (event) => {
+    if (!(event.target as Element).closest('.menu__cloud')) setOpen(false);
+  });
+
+  menu?.querySelectorAll('a').forEach((link) =>
+    link.addEventListener('click', () => setOpen(false, { restoreFocus: false })),
+  );
+
+  // Retour arrière du navigateur (page restaurée depuis le cache) : on repart avec le menu fermé.
+  window.addEventListener('pageshow', () => setOpen(false, { restoreFocus: false }));
 </script>
